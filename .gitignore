@@ -1,0 +1,30 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Android & Gradle
+**/.gradle/
+**/build/
+**/*.apk
+**/*.aab
+**/local.properties
+**/.idea/
+**/*.iml
+**/.navigation/
+**/captures/
+**/.cxx/
+
+# Flutter & Dart
+**/.dart_tool/
+**/.packages
+**/.pub/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+
+# Node & React Native
+**/node_modules/
+**/.expo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
