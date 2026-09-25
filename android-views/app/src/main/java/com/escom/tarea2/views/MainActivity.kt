@@ -2,6 +2,7 @@ package com.escom.tarea2.views
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -35,20 +36,6 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.action_theme -> {
-                    toggleTheme()
-                    true
-                }
-                R.id.action_info -> {
-                    showAboutDialog()
-                    true
-                }
-                else -> false
-            }
-        }
-
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             navigateTo(menuItem.itemId)
             binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -57,6 +44,39 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             navigateTo(R.id.menu_home)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.top_app_bar_menu, menu)
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        val isNight = currentNightMode == Configuration.UI_MODE_NIGHT_YES
+        val themeItem = menu.findItem(R.id.action_theme)
+        if (isNight) {
+            themeItem?.setIcon(R.drawable.ic_light_mode)
+            themeItem?.title = "Modo Claro"
+        } else {
+            themeItem?.setIcon(R.drawable.ic_theme)
+            themeItem?.title = "Modo Oscuro"
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                binding.drawerLayout.openDrawer(GravityCompat.START)
+                true
+            }
+            R.id.action_theme -> {
+                toggleTheme()
+                true
+            }
+            R.id.action_info -> {
+                showAboutDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -73,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.topAppBar.title = title
+        supportActionBar?.title = title
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()

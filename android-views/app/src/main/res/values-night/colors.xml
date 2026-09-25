@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material 3 Palette for Dark Mode -->
+    <color name="primary">#BAC3FF</color>
+    <color name="on_primary">#08218A</color>
+    <color name="primary_container">#26389C</color>
+    <color name="on_primary_container">#DEE0FF</color>
+
+    <color name="secondary">#C5C4DD</color>
+    <color name="on_secondary">#2E2F42</color>
+    <color name="secondary_container">#444559</color>
+    <color name="on_secondary_container">#E1E0F9</color>
+
+    <color name="tertiary">#E8B9D5</color>
+    <color name="surface">#121316</color>
+    <color name="on_surface">#E4E1E6</color>
+    <color name="surface_variant">#2E2E38</color>
+    <color name="on_surface_variant">#C7C5D0</color>
+    <color name="outline">#90909A</color>
+
+    <color name="card_stroke">#3D3D48</color>
+</resources>
