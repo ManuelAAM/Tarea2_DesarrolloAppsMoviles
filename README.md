@@ -64,6 +64,20 @@ El objetivo de este proyecto es construir un **catálogo interactivo completo de
 
 Cada una de las cuatro aplicaciones cuenta con una **pantalla principal (Dashboard/Home)** y **seis secciones temáticas** que agrupan más de 35 componentes de UI interactivos. Cumpliendo con los requisitos transversales, **cada elemento incluye documentación en pantalla** (título, ficha explicativa de 2 a 3 líneas de su propósito y casos de uso, y una demostración interactiva con la que el usuario puede interactuar de forma real y visible). Asimismo, se implementó adaptación automática a tema claro y oscuro, idioma 100% en español y **conexiones funcionales entre secciones**.
 
+### 🎨 ¿Por qué los elementos lucen visualmente idénticos entre tecnologías?
+A pesar de que las cuatro versiones fueron programadas en lenguajes distintos (Kotlin, Dart y TypeScript) y bajo mecanismos de renderizado radicalmente diferentes, **todas las interfaces comparten una apariencia y distribución casi idéntica**. Esto obedece a dos razones fundamentales:
+1. **Cumplimiento estricto del objetivo de la práctica**: La especificación de la Tarea 2 exige construir *la misma aplicación* en múltiples plataformas para comparar directamente componentes equivalentes. La paridad visual permite validar que un usuario final perciba la misma experiencia y jerarquía independientemente de la tecnología subyacente.
+2. **Estandarización bajo Material Design 3 (M3)**: Todas las implementaciones siguen las guías oficiales de diseño de Google:
+   - Misma paleta tonal (Índigo/Morado, superficies neutras y contenedores contrastantes).
+   - Mismos radios de curvatura en esquinas de tarjetas y botones (12dp a 28dp).
+   - Misma escala tipográfica y modo claro/oscuro adaptativo.
+
+#### Diferencias operativas bajo el capó:
+- **Android Views (XML)**: Funciona mediante el árbol de vistas clásico del sistema operativo (`android.view.View`). El diseño se declara en XML y se infla en tiempo de ejecución; las mutaciones visuales se realizan manualmente en Kotlin vía `ViewBinding`.
+- **Jetpack Compose**: No utiliza vistas clásicas de Android. Es un compilador declarativo en Kotlin que emite nodos visuales directamente sobre un lienzo gráfico nativo mediante funciones `@Composable`, recalculando únicamente los elementos cuyo estado cambie.
+- **Flutter**: No utiliza ningún componente nativo del sistema operativo. Flutter contiene su propio motor gráfico en C++ (Impeller/Skia) que dibuja cada botón, texto y animación píxel por píxel sobre la pantalla a 60/120 FPS.
+- **React Native**: Ejecuta la lógica en un motor de JavaScript/TypeScript y delega la representación visual a componentes nativos de la plataforma mediante el motor de maquetación Flexbox (Yoga).
+
 ---
 
 ## 📦 Origen del Proyecto y Aportaciones Propias
@@ -89,6 +103,7 @@ A fin de reflejar un desarrollo incremental y documentar el proceso de depuraci�
 | `flutter/` | `main.dart`, 7 Pantallas en Dart, `CatalogState`, `CatalogCard` | Implementar el catálogo en Flutter usando `ChangeNotifier`, `ListView.builder`, `Dismissible`, `RefreshIndicator`, `TabBarView` y Material 3. |
 | `extra/` | `App.tsx`, 7 Pantallas TypeScript, `CatalogCard` | Implementar la cuarta tecnología en React Native usando `FlatList`, `SectionList`, `Modal`, `Switch`, maquetación Flexbox Yoga y gestión de estado con hooks. |
 | `docs/img/` | 24 archivos PNG (`views_sec*.png`, `compose_sec*.png`, etc.) | Evidencia gráfica incrustada en sintaxis relativa para documentar la apariencia y ejecución de cada sección en cada tecnología. |
+| `binarios/` | `catalogo-views.apk`, `catalogo-compose.apk`, `catalogo-flutter.apk` | Archivos binarios ejecutables compilados de las tres versiones para instalación y prueba directa por el docente. |
 | `README.md` | Raíz del repositorio | Informe institucional completo que cubre marco teórico, tablas de equivalencias, instrucciones y reflexión académica bajo norma APA 7. |
 
 ---
@@ -322,6 +337,24 @@ A continuación se presenta la tabla comparativa exhaustiva que relaciona cada e
 
 ---
 
+### 5. Binarios Compilados Listos para Instalación (`binarios/`)
+En estricto cumplimiento con los requisitos de entrega de la práctica, el repositorio incluye los archivos binarios ejecutables `.apk` de las tres versiones nativas dentro de la carpeta [`binarios/`](binarios/):
+
+| Archivo Binario | Tecnología | Tamaño | Características del Paquete |
+| :--- | :--- | :---: | :--- |
+| `catalogo-views.apk` | Android Views (XML + Kotlin) | 7.3 MB | Build optimizado con Material 3 y modo claro/oscuro dinámico. |
+| `catalogo-compose.apk` | Jetpack Compose (Kotlin) | 16.9 MB | Build declarativo con UDF y componentes reactivos. |
+| `catalogo-flutter.apk` | Flutter (Dart / Material 3) | 51.7 MB | Build release universal con motor gráfico Impeller/Skia y tree-shaking de fuentes. |
+
+Para instalar cualquiera de estos APKs directamente en un emulador o dispositivo Android conectado mediante ADB:
+```bash
+adb install binarios/catalogo-views.apk
+adb install binarios/catalogo-compose.apk
+adb install binarios/catalogo-flutter.apk
+```
+
+---
+
 ## 🖼️ Galería de Evidencias Gráficas
 
 Las capturas de pantalla de cada una de las seis secciones temáticas en las cuatro tecnologías se encuentran almacenadas dentro de la carpeta [`docs/img/`](docs/img/):
@@ -388,16 +421,32 @@ Al concluir el desarrollo simultáneo de la misma aplicación en cuatro tecnolog
 ### 2. ¿Cuál generó código más legible y mantenible?
 **Jetpack Compose** generó el código más legible, elegante y mantenible. Al utilizar Kotlin puro, las funciones composables eliminan por completo la duplicidad de archivos (XML + Kotlin) y permiten componer componentes modulares reutilizables (como `CatalogItemCard`) en pocas líneas. El sistema de modificadores (`Modifier`) estandariza el padding, tamaños y comportamientos táctiles de manera lineal y fuertemente tipada. Además, la gestión declarativa del estado con `StateFlow` y elevación de estado (hoisting) produce una arquitectura limpia y predecible. Por su parte, Flutter presenta una legibilidad excelente pero sufre del fenómeno conocido como *widget hell* (anidamiento profundo de paréntesis y llaves de cierre).
 
-### 3. ¿Qué dificultades y retos técnicos se encontraron en cada una?
-- **Android Views y XML**: La mayor dificultad radicó en la verbosidad y fragmentación del código. Cada pantalla requirió múltiples archivos XML (`fragment_*.xml`, `item_*.xml`, `arrays.xml`, `colors.xml`, `themes.xml`), adaptadores complejos para `RecyclerView` con múltiples clases `ViewHolder`, y sincronización manual de visibilidad y estados. Cualquier error tipográfico en identificadores XML solo se detecta al compilar o inflar.
-- **Jetpack Compose**: El principal reto técnico fue dominar el ciclo de vida de la recomposición inteligente para evitar renderizados redundantes o pérdida de estado efímero durante giros de pantalla, requiriendo el uso riguroso de `remember`, `rememberSaveable` y `derivedStateOf`.
-- **Flutter**: La adaptación de dependencias y versiones de Material 3 (como la migración reciente hacia `CardThemeData`, `withValues()` y `RadioGroup`) exigió un análisis estricto de sintaxis para mantener cero advertencias en `flutter analyze`.
-- **React Native**: El mayor desafío fue garantizar que los componentes primitivos de React Native emulen fielmente las pautas de elevación y diseño de Material Design 3, requiriendo estilos explícitos en Flexbox para sombras, bordes y paddings que en nativo se obtienen de manera predeterminada.
+### 3. ¿Qué dificultades se encontraron con cada tecnología?
+Durante la implementación práctica y puesta en marcha de cada proyecto se presentaron retos específicos que requirieron análisis y resolución:
 
-### 4. ¿Con cuál preferiría trabajar en un entorno profesional y por qué?
-Para un entorno enfocado exclusivamente en el ecosistema **Android**, **Jetpack Compose** es indiscutiblemente la elección predilecta. Su adopción oficial por parte de Google, interoperabilidad bidireccional con código legacy de Views y su integración nativa con bibliotecas de Jetpack (Room, Navigation, ViewModel, Coroutines) garantizan el máximo rendimiento y menor deuda técnica.
+- **Android Views (XML)**:
+  - *Dificultad*: La separación entre los archivos de diseño en XML y la lógica de programación en Kotlin.
+  - *Impacto y resolución*: Gestionar adaptadores para listas y controlar manualmente la barra de navegación superior (Toolbar) para que las acciones (como el botón para alternar el tema claro/oscuro) no se perdieran ni se sobreescribieran durante el ciclo de vida de la actividad.
 
-No obstante, si el proyecto profesional exige un despliegue **multiplataforma simultáneo (Android e iOS)** con un único equipo de ingeniería, **Flutter** representa la opción más sólida y productiva. Su motor de renderizado propio garantiza consistencia visual pixel por pixel en cualquier dispositivo, su rendimiento gráfico a 60/120 FPS es indistinguible de una app nativa pura, y su ecosistema de paquetes maduros reduce drásticamente el tiempo de salida al mercado (*Time-to-Market*).
+- **Jetpack Compose**:
+  - *Dificultad*: Compatibilidad de versiones y dependencias entre el compilador de Kotlin y el entorno de Android Studio.
+  - *Impacto y resolución*: Se requirió alinear la versión del JDK y las herramientas de compilación para evitar fallos de construcción, además de estructurar los estados (`remember` y `mutableStateOf`) para que la pantalla se actualizara en tiempo real de forma fluida.
+
+- **Flutter**:
+  - *Dificultad*: Curva de aprendizaje al configurar el entorno de ejecución y la integración con el emulador.
+  - *Impacto y resolución*: A diferencia de Android Studio donde basta presionar un botón, con Flutter fue necesario aprender a utilizar la terminal y comandos (`flutter run`, `flutter devices`) para enlazar las rutas del SDK y desplegar la aplicación correctamente en el emulador de Android.
+
+- **React Native (Cuarta Tecnología Opcional)**:
+  - *Dificultad*: Configuración del servidor local de desarrollo (Metro Bundler) y resolución de módulos.
+  - *Impacto y resolución*: Se debieron ajustar los archivos de configuración para asegurar que el punto de inicio de la app se registrara adecuadamente y evitar pantallas rojas de error al cargar el paquete de JavaScript en el dispositivo.
+
+### 4. Veredicto: ¿Cuál es la mejor tecnología para trabajar?
+Tomando en cuenta la velocidad de desarrollo, la facilidad de configuración y la menor tasa de errores:
+
+> **Tecnología Ganadora: Jetpack Compose**  
+> **Jetpack Compose** demostró ser la mejor opción para trabajar en desarrollo móvil moderno. Al integrar la interfaz visual y la lógica dentro del mismo lenguaje (Kotlin puro), elimina por completo la necesidad de mantener múltiples archivos XML. No requiere servidores intermediarios ni herramientas de terminal complejas, se depura directamente en Android Studio y su arquitectura reactiva previene fallos comunes de sincronización de datos.
+>
+> Para proyectos que requieran máxima madurez y compatibilidad garantizada con dispositivos antiguos, **Android Views** sigue siendo la base más estable; sin embargo, para productividad y mantenibilidad presente y futura, **Jetpack Compose** es indiscutiblemente la tecnología más rápida y agradable de utilizar.
 
 ---
 
