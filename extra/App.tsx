@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { registerRootComponent } from 'expo';
 import {
   SafeAreaView,
   View,
@@ -316,3 +317,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 });
+
+registerRootComponent(App);
+

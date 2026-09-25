@@ -1,7 +1,7 @@
 {
   "name": "react-native-catalog",
   "version": "1.0.0",
-  "main": "App.tsx",
+  "main": "expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,12 +9,13 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "react": "18.3.1",
-    "react-native": "0.76.7"
+    "expo": "^57.0.25",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
   },
   "devDependencies": {
-    "@types/react": "~18.3.12",
-    "typescript": "^5.3.3"
+    "@types/react": "~19.2.4",
+    "typescript": "~6.0.3"
   },
   "private": true
 }
