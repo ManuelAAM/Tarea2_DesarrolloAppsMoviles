@@ -55,7 +55,7 @@
 
 ## 🚀 Descripción del Proyecto
 
-El objetivo de este proyecto es construir un **catálogo interactivo completo de elementos de interfaz de usuario** para dispositivos móviles e implementarlo de manera idéntica y funcional en **cuatro tecnologías móviles diferentes** (tres nativas/híbridas obligatorias y una cuarta tecnología multiplataforma adicional por puntos extra):
+El objetivo de este proyecto es construir un **catálogo interactivo completo de elementos de interfaz de usuario** para dispositivos móviles e implementarlo de manera idéntica y funcional en **cuatro tecnologías móviles diferentes** (tres nativas/híbridas obligatorias y una cuarta tecnología multiplataforma adicional por puntos extra, en este caso, se ha elegido usar React Native con Typescript):
 
 1. **`android-views/`**: Android Nativo desarrollado en Kotlin con vistas imperativas, layouts en XML y Material Design 3 (`Theme.Material3.DayNight.NoActionBar`).
 2. **`android-compose/`**: Android Nativo desarrollado en Kotlin con Jetpack Compose y Material Design 3 moderno bajo el paradigma puramente declarativo.
@@ -64,8 +64,8 @@ El objetivo de este proyecto es construir un **catálogo interactivo completo de
 
 Cada una de las cuatro aplicaciones cuenta con una **pantalla principal (Dashboard/Home)** y **seis secciones temáticas** que agrupan más de 35 componentes de UI interactivos. Cumpliendo con los requisitos transversales, **cada elemento incluye documentación en pantalla** (título, ficha explicativa de 2 a 3 líneas de su propósito y casos de uso, y una demostración interactiva con la que el usuario puede interactuar de forma real y visible). Asimismo, se implementó adaptación automática a tema claro y oscuro, idioma 100% en español y **conexiones funcionales entre secciones**.
 
-### 🎨 ¿Por qué los elementos lucen visualmente idénticos entre tecnologías?
-A pesar de que las cuatro versiones fueron programadas en lenguajes distintos (Kotlin, Dart y TypeScript) y bajo mecanismos de renderizado radicalmente diferentes, **todas las interfaces comparten una apariencia y distribución casi idéntica**. Esto obedece a dos razones fundamentales:
+### 🎨 ¿Por qué los elementos lucen prácticamnte idénticos entre tecnologías?
+A pesar de que las cuatro versiones sean programadas en lenguajes distintos (Kotlin, Dart y TypeScript) y bajo mecanismos de renderizado diferentes, **las interfaces comparten una apariencia y distribución casi idéntica**. Esto obedece a dos razones fundamentales:
 1. **Cumplimiento estricto del objetivo de la práctica**: La especificación de la Tarea 2 exige construir *la misma aplicación* en múltiples plataformas para comparar directamente componentes equivalentes. La paridad visual permite validar que un usuario final perciba la misma experiencia y jerarquía independientemente de la tecnología subyacente.
 2. **Estandarización bajo Material Design 3 (M3)**: Todas las implementaciones siguen las guías oficiales de diseño de Google:
    - Misma paleta tonal (Índigo/Morado, superficies neutras y contenedores contrastantes).
@@ -413,7 +413,7 @@ Las capturas de pantalla de cada una de las seis secciones temáticas en las cua
 
 ## 💡 Reflexión Final Académica
 
-Al concluir el desarrollo simultáneo de la misma aplicación en cuatro tecnologías móviles distintas, se obtienen conclusiones arquitectónicas fundamentales:
+Al concluir el desarrollo simultáneo de la misma aplicación en cuatro tecnologías móviles distintas, podemos dar las siguientes conclusiones:
 
 ### 1. ¿En cuál tecnología resultó más rápido construir la interfaz?
 **Flutter** demostró ser la tecnología más ágil y rápida para construir y prototipar la interfaz de usuario. Su catálogo integrado de widgets de Material 3 (`useMaterial3: true`), sumado al mecanismo de recarga en caliente (**Stateful Hot Reload**), permite previsualizar ajustes visuales en fracciones de segundo sin reiniciar el estado de la aplicación ni reejecutar tareas complejas de compilación de Gradle. En segundo lugar, **Jetpack Compose** ofrece una velocidad sobresaliente gracias a la ausencia de layouts XML separados; sin embargo, los tiempos de indexación y previsualización estática en Android Studio demandan mayores recursos de cómputo.
@@ -422,10 +422,10 @@ Al concluir el desarrollo simultáneo de la misma aplicación en cuatro tecnolog
 **Jetpack Compose** generó el código más legible, elegante y mantenible. Al utilizar Kotlin puro, las funciones composables eliminan por completo la duplicidad de archivos (XML + Kotlin) y permiten componer componentes modulares reutilizables (como `CatalogItemCard`) en pocas líneas. El sistema de modificadores (`Modifier`) estandariza el padding, tamaños y comportamientos táctiles de manera lineal y fuertemente tipada. Además, la gestión declarativa del estado con `StateFlow` y elevación de estado (hoisting) produce una arquitectura limpia y predecible. Por su parte, Flutter presenta una legibilidad excelente pero sufre del fenómeno conocido como *widget hell* (anidamiento profundo de paréntesis y llaves de cierre).
 
 ### 3. ¿Qué dificultades se encontraron con cada tecnología?
-Durante la implementación práctica y puesta en marcha de cada proyecto se presentaron retos específicos que requirieron análisis y resolución:
+Durante la implementación práctica y puesta en marcha de cada proyecto se presentaron varios retos y algunas dificultades específicas por corregir, que requirieron análisis y su propia resolución:
 
 - **Android Views (XML)**:
-  - *Dificultad*: La separación entre los archivos de diseño en XML y la lógica de programación en Kotlin.
+  - *Dificultad*: Separación entre los archivos de diseño en XML y la lógica de programación en Kotlin.
   - *Impacto y resolución*: Gestionar adaptadores para listas y controlar manualmente la barra de navegación superior (Toolbar) para que las acciones (como el botón para alternar el tema claro/oscuro) no se perdieran ni se sobreescribieran durante el ciclo de vida de la actividad.
 
 - **Jetpack Compose**:
@@ -440,13 +440,11 @@ Durante la implementación práctica y puesta en marcha de cada proyecto se pres
   - *Dificultad*: Configuración del servidor local de desarrollo (Metro Bundler) y resolución de módulos.
   - *Impacto y resolución*: Se debieron ajustar los archivos de configuración para asegurar que el punto de inicio de la app se registrara adecuadamente y evitar pantallas rojas de error al cargar el paquete de JavaScript en el dispositivo.
 
-### 4. Veredicto: ¿Cuál es la mejor tecnología para trabajar?
-Tomando en cuenta la velocidad de desarrollo, la facilidad de configuración y la menor tasa de errores:
-
-> **Tecnología Ganadora: Jetpack Compose**  
-> **Jetpack Compose** demostró ser la mejor opción para trabajar en desarrollo móvil moderno. Al integrar la interfaz visual y la lógica dentro del mismo lenguaje (Kotlin puro), elimina por completo la necesidad de mantener múltiples archivos XML. No requiere servidores intermediarios ni herramientas de terminal complejas, se depura directamente en Android Studio y su arquitectura reactiva previene fallos comunes de sincronización de datos.
+### Reflexión final: Tomando en cuenta la velocidad de desarrollo, la facilidad de configuración y la menor tasa de errores, de entre las diferentes 4 tecnologías trabajadas, puedo decir que Jetpack Compose es una gran opción para trabajar el desarrollo móvil, y, es con lo que yo personalmente preferiría trabajar, ya que me parece un poco más pura y simple al momento de poder ejecutarla, sin tantos fallos de sincronización o construcción, por ejemplo. 
+ 
+> **Jetpack Compose** más concretamente demuestra ser la mejor opción, ya que, al integrar la interfaz visual y la lógica dentro del mismo lenguaje (Kotlin puro), elimina por completo la necesidad de mantener múltiples archivos XML. No requiere servidores intermediarios ni herramientas de terminal complejas, se depura directamente en Android Studio y su arquitectura reactiva previene fallos comunes de sincronización de datos, y, personalmente la prefiero.
 >
-> Para proyectos que requieran máxima madurez y compatibilidad garantizada con dispositivos antiguos, **Android Views** sigue siendo la base más estable; sin embargo, para productividad y mantenibilidad presente y futura, **Jetpack Compose** es indiscutiblemente la tecnología más rápida y agradable de utilizar.
+> Para proyectos que requieran máxima madurez y compatibilidad garantizada con dispositivos antiguos, puedo entender como **Android Views** sigue siendo la base más estable; sin embargo, para productividad y mantenibilidad presente y futura, **Jetpack Compose** me figura como la tecnología más rápida y agradable de utilizar.
 
 ---
 
