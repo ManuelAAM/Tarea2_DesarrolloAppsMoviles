@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="initial_slider_range">
+        <item>20.0</item>
+        <item>80.0</item>
+    </array>
+    <string-array name="demo_categories">
+        <item>Todas las categorías</item>
+        <item>Componentes Básicos</item>
+        <item>Entradas y Formularios</item>
+        <item>Navegación y Estructura</item>
+    </string-array>
+</resources>

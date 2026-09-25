@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/nav_home" />
+    <item
+        android:id="@+id/menu_text_inputs"
+        android:icon="@drawable/ic_text"
+        android:title="@string/nav_text_inputs" />
+    <item
+        android:id="@+id/menu_buttons"
+        android:icon="@drawable/ic_buttons"
+        android:title="@string/nav_buttons" />
+    <item
+        android:id="@+id/menu_selection"
+        android:icon="@drawable/ic_selection"
+        android:title="@string/nav_selection" />
+    <item
+        android:id="@+id/menu_lists"
+        android:icon="@drawable/ic_lists"
+        android:title="@string/nav_lists" />
+    <item
+        android:id="@+id/menu_feedback"
+        android:icon="@drawable/ic_feedback"
+        android:title="@string/nav_feedback" />
+    <item
+        android:id="@+id/menu_containers"
+        android:icon="@drawable/ic_containers"
+        android:title="@string/nav_containers" />
+</menu>

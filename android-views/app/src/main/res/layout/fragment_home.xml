@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Banner Institucional -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_container"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ESCOM - IPN | DAMN"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                    android:textColor="@color/on_primary_container" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Catálogo de Elementos Básicos de UI"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:textColor="@color/on_primary_container"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Versión nativa con Android Views y XML. Esta aplicación demuestra de manera interactiva más de 35 elementos de interfaz agrupados en seis categorías fundamentales, con soporte para modo claro/oscuro y reactividad en tiempo real."
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="@color/on_primary_container" />
+
+                <TextView
+                    android:id="@+id/tvStudentInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Alumno: Aragón Martínez Manuel Alejandro | Boleta: 2023630411 | Grupo: 7CV4"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                    android:textColor="@color/on_primary_container" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Banner de Estado Reactivo / Vinculación -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="1dp"
+            app:strokeColor="@color/card_stroke"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Estado Global de la Aplicación"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                    android:textColor="@color/primary" />
+
+                <TextView
+                    android:id="@+id/tvGlobalState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Última acción: Ninguna registrada"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+                <TextView
+                    android:id="@+id/tvTotalItems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Elementos en la colección: 16"
+                    android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                    android:textColor="@color/secondary" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            android:text="Secciones del Catálogo"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+
+        <!-- Acceso directo a Sección 1 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGoSection1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Entrada de Texto (Campos, Teclados, Búsqueda)"
+            app:icon="@drawable/ic_text"
+            style="@style/Widget.Material3.Button.TonalButton" />
+
+        <!-- Acceso directo a Sección 2 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGoSection2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="2. Botones y Acciones (Filled, Outlined, FAB, Loading)"
+            app:icon="@drawable/ic_buttons"
+            style="@style/Widget.Material3.Button.TonalButton" />
+
+        <!-- Acceso directo a Sección 3 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGoSection3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="3. Elementos de Selección (Check, Radio, Sliders, Pickers)"
+            app:icon="@drawable/ic_selection"
+            style="@style/Widget.Material3.Button.TonalButton" />
+
+        <!-- Acceso directo a Sección 4 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGoSection4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="4. Listas y Colecciones (RecyclerView, Grid, Swipe, Tabs)"
+            app:icon="@drawable/ic_lists"
+            style="@style/Widget.Material3.Button.TonalButton" />
+
+        <!-- Acceso directo a Sección 5 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGoSection5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="5. Información y Retroalimentación (Progress, Dialogs, Cards)"
+            app:icon="@drawable/ic_feedback"
+            style="@style/Widget.Material3.Button.TonalButton" />
+
+        <!-- Acceso directo a Sección 6 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGoSection6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="6. Contenedores y Estructura (Linear, Frame, Constraint, Scroll)"
+            app:icon="@drawable/ic_containers"
+            style="@style/Widget.Material3.Button.TonalButton" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

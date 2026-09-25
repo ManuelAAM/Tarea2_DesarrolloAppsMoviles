@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Catálogo UI (Views)</string>
+    <string name="app_subtitle">ESCOM - DAMN Tarea 2</string>
+
+    <!-- Secciones -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_text_inputs">Entrada de Texto</string>
+    <string name="nav_buttons">Botones y Acciones</string>
+    <string name="nav_selection">Selección</string>
+    <string name="nav_lists">Listas y Colecciones</string>
+    <string name="nav_feedback">Retroalimentación</string>
+    <string name="nav_containers">Contenedores</string>
+
+    <!-- General -->
+    <string name="btn_accept">Aceptar</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_undo">Deshacer</string>
+    <string name="btn_clear">Limpiar</string>
+    <string name="btn_add">Agregar</string>
+    <string name="empty_list_message">No hay elementos en la lista. ¡Agrega uno nuevo desde la Sección 1!</string>
+</resources>
